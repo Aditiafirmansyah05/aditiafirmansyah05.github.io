@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Aditia Firmansyah</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 450px;
+            text-align: center;
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #764ba2;
+            margin-bottom: 20px;
+        }
+        h2 { color: #333; margin: 10px 0 5px; font-size: 28px; }
+        .nim { color: #007bff; font-weight: bold; margin-bottom: 20px; display: block; }
+        .motivation { font-style: italic; color: #555; margin-bottom: 20px; line-height: 1.6; }
+        .instagram-link {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: #e1306c;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+        .instagram-link i { font-size: 24px; margin-right: 10px; }
+        table { width: 100%; border-collapse: collapse; text-align: left; margin-bottom: 20px; }
+        td { padding: 10px 5px; font-size: 14px; }
+        .label { font-weight: bold; width: 140px; color: #555; }
+        .marquee-container {
+            background-color: #764ba2;
+            color: white;
+            padding: 10px 0;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        .footer { margin-top: 30px; font-size: 12px; color: #aaa; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <img src="foto.jpg" alt="Foto Aditia" class="profile-img">
+
+        <h2>Aditia Firmansyah</h2>
+        <span class="nim">NIM: 240602028</span>
+
+        <p class="motivation">
+            "Setiap baris kode adalah langkah menuju inovasi. Teruslah belajar dan berkarya untuk masa depan yang lebih baik."
+        </p>
+
+        <a href="https://www.instagram.com/aditia._.05" target="_blank" class="instagram-link">
+            <i class="fab fa-instagram"></i> aditia._.05
+        </a>
+
+        <table>
+            <tr><td class="label">Universitas</td><td>Universitas Hamzanwadi</td></tr>
+            <tr><td class="label">Fakultas</td><td>Fakultas Teknik</td></tr>
+            <tr><td class="label">Program Studi</td><td>Teknik Informatika</td></tr>
+            <tr><td class="label">Kelas / Sem</td><td>TI B / Semester 3</td></tr>
+        </table>
+
+        <div class="marquee-container">
+            <marquee scrollamount="5">
+                Machine Learning Engineer | Fullstack Developer | Data Scientist
+            </marquee>
+        </div>
+
+        <div class="footer">Pemrograman Lanjut</div>
+    </div>
+</body>
+</html>
