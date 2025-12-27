@@ -1,0 +1,599 @@
+/* CodeJourney: Programmer/Hacker Theme */
+
+:root {
+    --bg-color: #0d1117;
+    --panel-bg: #161b22;
+    --border-color: #30363d;
+    --primary: #58a6ff;
+    /* GitHub Blue-ish */
+    --accent: #2ea043;
+    /* Green */
+    --danger: #da3633;
+    --text-main: #c9d1d9;
+    --text-muted: #8b949e;
+    --font-mono: 'Fira Code', 'Consolas', 'Courier New', monospace;
+    --glow: 0 0 10px rgba(88, 166, 255, 0.4);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-mono);
+    background: linear-gradient(125deg, #000000 0%, #240046 35%, #001f54 70%, #004d1a 100%);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: var(--text-main);
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header & Terminal Bar */
+header {
+    width: 100%;
+    background: var(--panel-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary);
+    text-shadow: 0 0 5px var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo::before {
+    content: ">_";
+    color: var(--accent);
+    margin-right: 5px;
+    animation: blink 1s infinite;
+}
+
+.score {
+    background: #000;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    /* Slightly squarish */
+    font-family: var(--font-mono);
+    box-shadow: 0 0 5px rgba(46, 160, 67, 0.4);
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Mascot as CLI Agent */
+.mascot-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--primary);
+}
+
+.mascot-icon {
+    font-size: 2.5rem;
+}
+
+.mascot-text {
+    font-family: var(--font-mono);
+    color: var(--text-main);
+}
+
+.mascot-text::before {
+    content: "SYSTEM_MSG: ";
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* Screens */
+.screen {
+    display: none;
+    width: 100%;
+    animation: fadeIn 0.4s ease;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+h2.title {
+    text-align: center;
+    color: var(--text-main);
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 10px;
+}
+
+/* Cards (IDE / File Style) */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 25px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    border-color: var(--primary);
+    background: #1c2128;
+    transform: translateY(-5px);
+    box-shadow: var(--glow);
+}
+
+.card i {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
+}
+
+.card h3 {
+    font-size: 1.1rem;
+    color: var(--text-main);
+}
+
+.card p {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+/* Login Form (Terminal Input) */
+.login-card {
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 40px;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    background: #0d1117;
+    border: 1px solid var(--border-color);
+    color: var(--primary);
+    font-family: var(--font-mono);
+    border-radius: 4px;
+    outline: none;
+    transition: border 0.3s;
+}
+
+.form-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 5px rgba(88, 166, 255, 0.3);
+}
+
+/* Buttons (Programmer Style) */
+.btn-action {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 12px 30px;
+    font-family: var(--font-mono);
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-action:hover {
+    background: var(--accent);
+    color: #0d1117;
+    box-shadow: 0 0 15px rgba(46, 160, 67, 0.5);
+}
+
+.btn-back {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    margin-bottom: 10px;
+}
+
+.btn-back:hover {
+    color: var(--text-main);
+    text-decoration: underline;
+}
+
+/* Game Panel (Code Editor Look) */
+.game-panel {
+    background: #1e1e1e;
+    /* VSCode Dark */
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.game-panel::before {
+    content: "● ● ●";
+    display: block;
+    color: #444;
+    font-size: 0.8rem;
+    margin-bottom: 15px;
+    letter-spacing: 5px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+.progress-container {
+    height: 4px;
+    background: #333;
+    margin-bottom: 20px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 0.3s linear;
+    box-shadow: 0 0 10px var(--accent);
+}
+
+.question {
+    font-size: 1.1rem;
+    color: #d4d4d4;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.question::before {
+    content: "const question = ";
+    color: #569cd6;
+}
+
+.question::after {
+    content: ";";
+    color: #ccc;
+}
+
+/* Options as Code Blocks */
+.opt-btn {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background: #252526;
+    border: 1px solid #3e3e42;
+    color: #d4d4d4;
+    text-align: left;
+    font-family: var(--font-mono);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+}
+
+.opt-btn:hover {
+    background: #2d2d30;
+    border-color: var(--primary);
+}
+
+.opt-btn.correct {
+    border-color: var(--accent);
+    background: rgba(46, 160, 67, 0.1);
+    color: var(--accent);
+}
+
+.opt-btn.wrong {
+    border-color: var(--danger);
+    background: rgba(218, 54, 51, 0.1);
+    color: var(--danger);
+}
+
+.opt-btn::before {
+    content: ">> ";
+    color: #569cd6;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.opt-btn:hover::before {
+    opacity: 1;
+}
+
+/* TTS Grid */
+.tts-grid {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.tts-box {
+    width: 45px;
+    height: 45px;
+    background: #000;
+    border: 1px solid #444;
+    color: var(--primary);
+    font-family: var(--font-mono);
+    text-align: center;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+.tts-box:focus {
+    border-color: var(--accent);
+    outline: none;
+    box-shadow: 0 0 10px var(--accent);
+}
+
+/* Feedback */
+.feedback {
+    background: #0d1117;
+    border: 1px dashed var(--text-muted);
+    padding: 15px;
+    margin-top: 20px;
+    text-align: center;
+    color: var(--text-main);
+    display: none;
+}
+
+/* Debug Mode Code Input */
+#debug-input {
+    width: 100%;
+    padding: 15px;
+    background: #000;
+    border: 1px solid #444;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    margin-bottom: 10px;
+}
+
+/* --- CERTIFICATE (Hacker Style) --- */
+.result-card {
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.cert-wrapper {
+    background: #000;
+    border: 2px solid var(--accent);
+    padding: 40px;
+    font-family: 'Courier New', monospace;
+    position: relative;
+    max-width: 700px;
+    margin: 20px auto;
+    color: var(--accent);
+    box-shadow: 0 0 30px rgba(46, 160, 67, 0.2);
+    text-align: left;
+}
+
+.cert-wrapper::before {
+    content: "ENCRYPTED CONNECTION ESTABLISHED...";
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 0.6rem;
+    opacity: 0.7;
+}
+
+.cert-header {
+    text-align: center;
+    border-bottom: 1px dashed var(--accent);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.cert-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px var(--accent);
+}
+
+.cert-body {
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.cert-name {
+    font-size: 1.8rem;
+    color: #fff;
+    text-align: center;
+    display: block;
+    margin: 20px 0;
+    border: 1px solid #333;
+    padding: 10px;
+    background: #111;
+}
+
+.cert-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.cert-sign {
+    border-top: 1px solid var(--accent);
+    padding-top: 5px;
+    width: 200px;
+    text-align: center;
+}
+
+.qr-mock {
+    width: 60px;
+    height: 60px;
+    background: var(--accent);
+    /* Placeholder for QR */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    font-weight: bold;
+    font-size: 0.7rem;
+}
+
+
+
+/* --- NEW ANIMATIONS: MACHINE LEARNING THEME --- */
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Neural Network Pulse Effect */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(circle, rgba(88, 166, 255, 0.1) 1px, transparent 1px),
+        radial-gradient(circle, rgba(46, 160, 67, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px, 30px 30px;
+    background-position: 0 0, 15px 15px;
+    pointer-events: none;
+    z-index: -1;
+    animation: neuralMove 20s linear infinite;
+}
+
+@keyframes neuralMove {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-20px) scale(1.05);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Scanning Line Animation */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, transparent, var(--primary), var(--accent), transparent);
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 1000;
+    animation: scanline 6s linear infinite;
+}
+
+@keyframes scanline {
+    0% {
+        top: -10%;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.5;
+    }
+
+    90% {
+        opacity: 0.5;
+    }
+
+    100% {
+        top: 110%;
+        opacity: 0;
+    }
+}

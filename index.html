@@ -1,90 +1,252 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil Aditia Firmansyah</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-        .card {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            width: 450px;
-            text-align: center;
-        }
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid #764ba2;
-            margin-bottom: 20px;
-        }
-        h2 { color: #333; margin: 10px 0 5px; font-size: 28px; }
-        .nim { color: #007bff; font-weight: bold; margin-bottom: 20px; display: block; }
-        .motivation { font-style: italic; color: #555; margin-bottom: 20px; line-height: 1.6; }
-        .instagram-link {
-            display: inline-flex;
-            align-items: center;
-            text-decoration: none;
-            color: #e1306c;
-            font-weight: bold;
-            margin-bottom: 25px;
-        }
-        .instagram-link i { font-size: 24px; margin-right: 10px; }
-        table { width: 100%; border-collapse: collapse; text-align: left; margin-bottom: 20px; }
-        td { padding: 10px 5px; font-size: 14px; }
-        .label { font-weight: bold; width: 140px; color: #555; }
-        .marquee-container {
-            background-color: #764ba2;
-            color: white;
-            padding: 10px 0;
-            border-radius: 10px;
-            font-weight: bold;
-        }
-        .footer { margin-top: 30px; font-size: 12px; color: #aaa; }
-    </style>
+    <title>CodeJourney: Terminal Edition</title>
+    <!-- Programmer Fonts: Fira Code / Consolas -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Style -->
+    <link rel="stylesheet" href="style.css">
+    <!-- PDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
+
 <body>
-    <div class="card">
-        <img src="foto.jpg" alt="Foto Aditia" class="profile-img">
 
-        <h2>Aditia Firmansyah</h2>
-        <span class="nim">NIM: 240602028</span>
+    <header>
+        <div class="logo"><i class="fa-solid fa-terminal"></i> CODE_JOURNEY v2.0</div>
+        <div class="score">SCORE_VAL: <span id="score">0</span></div>
+    </header>
 
-        <p class="motivation">
-            "Setiap baris kode adalah langkah menuju inovasi. Teruslah belajar dan berkarya untuk masa depan yang lebih baik."
-        </p>
+    <div class="container">
 
-        <a href="https://www.instagram.com/aditia._.05" target="_blank" class="instagram-link">
-            <i class="fab fa-instagram"></i> aditia._.05
-        </a>
-
-        <table>
-            <tr><td class="label">Universitas</td><td>Universitas Hamzanwadi</td></tr>
-            <tr><td class="label">Fakultas</td><td>Fakultas Teknik</td></tr>
-            <tr><td class="label">Program Studi</td><td>Teknik Informatika</td></tr>
-            <tr><td class="label">Kelas / Sem</td><td>TI B / Semester 3</td></tr>
-        </table>
-
-        <div class="marquee-container">
-            <marquee scrollamount="5">
-                Machine Learning Engineer | Fullstack Developer | Data Scientist
-            </marquee>
+        <!-- MASCOT AREA -->
+        <div class="mascot-box">
+            <div class="mascot-icon">👾</div>
+            <div class="mascot-text" id="mascot-msg">SYSTEM_INIT: Welcome User. Please Identify.</div>
         </div>
 
-        <div class="footer">Pemrograman Lanjut</div>
+        <!-- SCREEN: LOGIN -->
+        <div id="screen-login" class="screen active">
+            <h2 class="title">USER_AUTHENTICATION</h2>
+            <div class="login-card">
+                <div class="form-group">
+                    <label>> INPUT_USER_NAME</label>
+                    <input type="text" id="user-name" placeholder="_" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label>> INPUT_DATE_OF_BIRTH</label>
+                    <input type="date" id="user-dob" required>
+                </div>
+                <div class="form-group">
+                    <label>> INPUT_MAJOR</label>
+                    <input type="text" id="user-prodi" placeholder="e.g. Informatics" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label>> INPUT_SEMESTER</label>
+                    <input type="number" id="user-sem" placeholder="1-8" min="1" max="14" required>
+                </div>
+                <div style="text-align:center;">
+                    <button class="btn-action" onclick="GAME.registerUser()"><i class="fa-solid fa-key"></i>
+                        AUTHENTICATE</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN: MAIN MENU -->
+        <div id="screen-home" class="screen">
+            <h2 class="title" id="welcome-title">MAIN_MENU</h2>
+            <div class="grid">
+                <div class="card home-btn" onclick="GAME.showScreen('screen-lang')">
+                    <i class="fa-solid fa-laptop-code" style="color: #58a6ff;"></i>
+                    <h3>START_SIMULATION</h3>
+                    <p>Execute Quiz, Puzzle & Debug modes.</p>
+                </div>
+                <!-- Future features can go here -->
+            </div>
+        </div>
+
+        <!-- SCREEN: LANGUAGE SELECTION -->
+        <div id="screen-lang" class="screen">
+            <button class="btn-back" onclick="GAME.showScreen('screen-home')">
+                < ../BACK</button>
+                    <h2 class="title">SELECT_LANGUAGE</h2>
+                    <div class="grid">
+                        <div class="card" onclick="GAME.selectLang('HTML')">
+                            <i class="fa-brands fa-html5" style="color: #E44D26;"></i>
+                            <h3>HTML5</h3>
+                        </div>
+                        <div class="card" onclick="GAME.selectLang('CSS')">
+                            <i class="fa-brands fa-css3-alt" style="color: #264DE4;"></i>
+                            <h3>CSS3</h3>
+                        </div>
+                        <div class="card" onclick="GAME.selectLang('JS')">
+                            <i class="fa-brands fa-js" style="color: #F7DF1E;"></i>
+                            <h3>JAVASCRIPT</h3>
+                        </div>
+                        <div class="card" onclick="GAME.selectLang('Python')">
+                            <i class="fa-brands fa-python" style="color: #3776AB;"></i>
+                            <h3>PYTHON</h3>
+                        </div>
+                    </div>
+        </div>
+
+        <!-- SCREEN: MODE SELECTION -->
+        <div id="screen-mode" class="screen">
+            <button class="btn-back" onclick="GAME.showScreen('screen-lang')">
+                < ../BACK</button>
+                    <h2 class="title">SELECT_MODE</h2>
+                    <div class="grid">
+                        <div class="card" onclick="GAME.selectMode('quiz')">
+                            <i class="fa-solid fa-circle-question" style="color: #d1d5db;"></i>
+                            <h3>LOGIC_QUIZ</h3>
+                        </div>
+                        <div class="card" onclick="GAME.selectMode('tts')">
+                            <i class="fa-solid fa-table-cells" style="color: #d1d5db;"></i>
+                            <h3>CODE_PUZZLE</h3>
+                        </div>
+                        <div class="card" onclick="GAME.selectMode('debug')">
+                            <i class="fa-solid fa-bug-slash" style="color: #d1d5db;"></i>
+                            <h3>DEBUG_FIX</h3>
+                        </div>
+                    </div>
+        </div>
+
+        <!-- SCREEN: DIFFICULTY (Replaced with TIME ATTACK INFO) -->
+        <div id="screen-diff" class="screen">
+            <button class="btn-back" onclick="GAME.showScreen('screen-mode')">
+                < ../BACK</button>
+                    <h2 class="title">TIME_ATTACK_PROTOCOL</h2>
+                    <div class="card" onclick="GAME.startGame()" style="max-width: 500px; margin: 0 auto;">
+                        <i class="fa-solid fa-stopwatch" style="color: #da3633; font-size: 4rem;"></i>
+                        <h3>START_CHALLENGE</h3>
+                        <div style="text-align: left; margin-top: 20px; color: var(--text-muted); font-size: 0.9rem;">
+                            <p>> WAKTU_AWAL: 60 DETIK</p>
+                            <p>> JAWAB_BENAR: +2 DETIK</p>
+                            <p>> JAWAB_SALAH: TIDAK ADA PENGURANGAN</p>
+                            <p>> MISI: JAWAB SEBANYAK MUNGKIN</p>
+                        </div>
+                        <button class="btn-action" style="margin-top: 20px; width: 100%; justify-content: center;">
+                            INITIATE_RUN()
+                        </button>
+                    </div>
+        </div>
+
+        <!-- SCREEN: GAMEPLAY -->
+        <div id="screen-game" class="screen">
+            <button class="btn-back" onclick="GAME.quitGame()" style="margin-bottom: 10px;">
+                < TERMINATE_SESSION</button>
+                    <div class="game-panel">
+                        <!-- TIMER BAR -->
+                        <div class="timer-container" style="margin-bottom: 15px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span>TIME_REMAINING</span>
+                                <span id="timer-val" style="color: var(--danger); font-weight: bold;">60s</span>
+                            </div>
+                            <div class="progress-container" style="margin-bottom: 0;">
+                                <div id="timer-bar" class="progress-fill"
+                                    style="width: 100%; background: var(--danger);"></div>
+                            </div>
+                        </div>
+
+                        <div
+                            style="display:flex; justify-content:space-between; margin-bottom:15px; font-family:var(--font-mono); font-size:0.8rem; color:#8b949e;">
+                            <span id="label-mode">QUIZ</span>
+                            <span id="label-diff">INFINITE_RUN</span>
+                        </div>
+                        <div id="question-text" class="question">Loading...</div>
+
+                        <!-- QUIZ AREA -->
+                        <div id="area-quiz" style="display:none;"></div>
+
+                        <!-- TTS AREA -->
+                        <div id="area-tts" style="display:none;">
+                            <p style="text-align:center; font-size:0.8rem; margin-bottom:10px; color:#8b949e;">
+                                AVAILABLE_TOKENS:</p>
+                            <div id="tts-options"
+                                style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:15px;">
+                            </div>
+                            <div id="tts-grid" class="tts-grid"></div>
+                            <div style="text-align:center;">
+                                <button class="btn-action" onclick="GAME.checkTTS()"
+                                    id="btn-check-tts">EXECUTE_CHECK</button>
+                            </div>
+                        </div>
+
+                        <!-- DEBUG AREA -->
+                        <div id="area-debug" style="display:none;">
+                            <div
+                                style="background:#0d1117; border:1px solid #da3633; color:#f85149; padding:15px; border-radius:6px; font-family:monospace; margin-bottom:15px; position:relative;">
+                                <div
+                                    style="position:absolute; top:-10px; left:10px; background:#0d1117; padding:0 5px; font-size:0.8rem; color:#da3633;">
+                                    ERROR_LOG</div>
+                                <span id="debug-broken-code" style="display:block; margin-top:5px;"></span>
+                            </div>
+                            <input type="text" id="debug-input" autocomplete="off" placeholder="// Type fix here..."
+                                style="width:100%; padding:15px; background:#0d1117; border:1px solid #30363d; color:#58a6ff; font-family:monospace; outline:none; margin-bottom:10px;">
+                            <button class="btn-action" onclick="GAME.checkDebug()" id="btn-debug-run"
+                                style="width:100%; justify-content:center;">RUN_FIX()</button>
+                        </div>
+
+                        <div id="feedback" class="feedback"></div>
+
+                        <button id="btn-next" class="btn-action"
+                            style="display:none; width:100%; justify-content:center; margin-top:20px;"
+                            onclick="GAME.nextQuestion()">CONTINUE_SEQUENCE >></button>
+                    </div>
+        </div>
+
+        <!-- SCREEN: RESULT -->
+        <div id="screen-result" class="screen">
+            <div class="result-card">
+                <i class="fa-solid fa-check-circle" style="font-size: 4rem; color: #2ea043; margin-bottom:20px;"></i>
+                <h2 style="color:var(--text-main);">SESSION_COMPLETE</h2>
+                <div class="result-score" id="final-score"
+                    style="font-size:3rem; color:var(--primary); font-weight:bold; margin:20px 0; font-family:var(--font-mono);">
+                    0</div>
+                <p id="result-text" style="color:var(--text-muted);">Status...</p>
+
+                <div style="margin-top:40px; display:flex; justify-content:center; gap:15px;">
+                    <button class="btn-action" onclick="GAME.reset()">RESTART_SYSTEM ↻</button>
+                    <button class="btn-action" id="btn-save" style="border-color:#2ea043; color:#2ea043;"
+                        onclick="GAME.saveProgress()">SIMPAN PROGRES �</button>
+                </div>
+            </div>
+
+            <!-- HACKER STYLE CERTIFICATE FOR PRINT -->
+            <div id="print-cert" style="display:none;">
+                <div class="cert-wrapper">
+                    <div class="cert-header">
+                        <div class="cert-title">CERTIFICATE_OF_MASTERY</div>
+                        <div style="font-size:0.8rem; letter-spacing:3px;">SECURE_ID: <span
+                                id="cert-id-mock">0XF92A-44B</span></div>
+                    </div>
+                    <div class="cert-body">
+                        <p>THIS CERTIFIES THAT THE ENTITY KNOWN AS:</p>
+                        <span class="cert-name" id="print-name">USER_NAME</span>
+                        <p>HAS SUCCESSFULLY EXECUTED ALL PROTOCOLS IN:</p>
+                        <p style="font-size:1.5rem; color:#fff; margin:15px 0;" id="print-lvl">MODULE_NAME</p>
+                        <p>ACHIEVEMENT STATUS: <strong>PERFECT_SCORE (100%)</strong></p>
+                    </div>
+                    <div class="cert-footer">
+                        <div class="qr-mock">QR_CODE</div>
+                        <div class="cert-sign">
+                            <span
+                                style="font-family:'Dancing Script', cursive; font-size:1.5rem;">SystemAdmin</span><br>
+                            AUTHORIZED_SIGNATURE
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
